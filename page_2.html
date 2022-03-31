@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="favicon.png">
+        <meta name="description" content="Evaluación diagnóstica de Introducción al Desarrollo Front End con HTML, CSS y JavaScript" />
+        <meta name="keywords" content="HTML, CSS, JavaScript" />
+        <meta name="author" content="Camila Gonzalez" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="style.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <title>Dibujando con p5!</title>
+    </head>
+    <body>
+        <div id="uno"><a href="index.html">INICIO</a></div>
+        <div id="otro"><a href="page_1.html">01</a> / <strong><a href="page_2.html">02</a></strong> / <a href="page_3.html">03</a></div>
+        <header><h1>Dibuja un <span id="animal"></span></h1></header>
+        <footer>
+            <div id="controles"></div>
+            <div id='print'><a href="#" id="descarga">Descarga tu creación</a></div>
+        </footer>
+        <script>
+            var alt = ["zorro", "león", "ratón", "pingüino", "oso", "jirafa", "gato"];
+            function setup() {
+                document.getElementById("animal").textContent += random(alt);
+                var d = select("#descarga");
+                d.mousePressed(artemania);
+                createCanvas(windowWidth - 50, windowHeight - 50).position(25, 30).style("z-index", -1);
+                background(255);
+                elColor = createColorPicker("#777777").parent("controles");
+                elSlider = createSlider(10, 50, 3).parent("controles");
+            }
+            function draw() {
+                if (mouseIsPressed) {
+                    fill(elColor.color())
+                    square(mouseX, mouseY,elSlider.value());
+                }
+            }
+            function artemania() {
+                saveCanvas("mi_creacion_artistica", "jpg");
+            }
+            function windowResized() {
+                resizeCanvas(windowWidth - 50, windowHeight - 50);
+            }
+        </script>
+    </body>
+</html>
